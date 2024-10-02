@@ -7,15 +7,17 @@
 
 body{
     font-size: 100%;
-  
-}
-
-.banner{
     background-image: url('background.webp');
     height:100vh;
     background-position: center;
     background-size: cover;
-    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  
+}
+
+.banner{
+    
 }
 
 .header{
