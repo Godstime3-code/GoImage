@@ -1,11 +1,17 @@
 let imageInput = document.querySelector('#js-image');
-let errorEl = document.querySelector('#error');
+let loaderEl = document.querySelector('.loader');
 const API_KEY = 'vFvM0sXY2xE1b0EgsVaPPVUiUpuPyTAmr3PnXn8CpPyiHLw5gpiKyfVZ';
 const API_URL  = "https://api.pexels.com/v1/search";
 
 
 async function searchImages(query){
     try{
+
+        if(imageInput.value === ''){
+            return;
+        }
+
+        loaderEl.style.visibility = 'visible';
         const response = await fetch(`${API_URL}?query=${query}&per_page=25`, {
             method : 'GET',
             headers: {
@@ -18,7 +24,8 @@ async function searchImages(query){
         }
     
         const data  = await response.json();
-        displayImages(data.photos)
+        
+        displayImages(data.photos);
     }catch(error){
        console.error(error)
     }
@@ -35,6 +42,8 @@ function displayImages(photos) {
         imgElement.alt = photo.alt
         gallery.appendChild(imgElement);
     });
+    
+    loaderEl.style.visibility = 'hidden'
 }
 
 document.getElementById('search-button').addEventListener('click', () => {
